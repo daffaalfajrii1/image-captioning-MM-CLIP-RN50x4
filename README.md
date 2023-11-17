@@ -43,11 +43,11 @@ To run the image captioning model, follow these steps:
 
 4. Open the Colab inference 
    Navigate to the Colab notebook (.ipynb) and follow the steps outlined, including:
-   a. Image Embedding
-   b. Train
+   * a. Image Embedding
+   * b. Train
 
 5. Output train is on .pt format. 
    The trained model will produce output in .pt format. You can find the model weights in the output directory. The file may be named something like image_captioning_model.pt.
 
-6.Create a new folder named deploy in the project directory. 
+6. Create a new folder named deploy in the project directory. 
    Move the trained model file (image_captioning_model.pt) to the deploy folder. Include your Flask deployment script (main.py) in the deploy folder.
