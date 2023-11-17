@@ -21,8 +21,8 @@ The image captioning model utilizes a ResNet-50x4 backbone for feature extractio
 ### Dataset
 
 The dataset used for training consists of 3800 images captured in public spaces, and each image is associated with four captions. This diverse dataset aims to enhance the model's ability to provide detailed and informative captions for various scenarios encountered in public environments.
-[data_caption_here](https://drive.google.com/drive/u/0/folders/11tcspegZxbrwQnx9SnlCDcMXYPAbzR6V)
-[data_image_here](https://drive.google.com/drive/u/0/folders/1ZfstVhqay7GzZDOWTIEhcZCTRAJFE6LB)
+-[data_caption_here](https://drive.google.com/drive/u/0/folders/11tcspegZxbrwQnx9SnlCDcMXYPAbzR6V)
+-[data_image_here](https://drive.google.com/drive/u/0/folders/1ZfstVhqay7GzZDOWTIEhcZCTRAJFE6LB)
 
 ## Installation
 
@@ -42,7 +42,7 @@ To run the image captioning model, follow these steps:
    ! pip install git+https://github.com/openai/CLIP.git
 
 4. Open the Colab inference and follow the step such as
-   a. Image embedding
-   b. train
+   -a. Image embedding
+   -b. train
 
 5. Output train is on .pt format
