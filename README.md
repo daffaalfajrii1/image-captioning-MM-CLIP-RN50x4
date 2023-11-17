@@ -18,6 +18,10 @@ CLIP is a powerful vision-language pretraining model that learns joint represent
 
 The image captioning model utilizes a ResNet-50x4 backbone for feature extraction and is fine-tuned using CLIP. The training process involves learning to generate descriptive captions for images based on the joint understanding of textual and visual data.
 
+### Dataset
+
+Use 3800 image
+
 ## Installation
 
 To run the image captioning model, follow these steps:
