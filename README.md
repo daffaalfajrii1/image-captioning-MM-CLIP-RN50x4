@@ -49,5 +49,10 @@ To run the image captioning model, follow these steps:
 5. Output train is on .pt format. 
    The trained model will produce output in .pt format. You can find the model weights in the output directory. The file may be named something like image_captioning_model.pt.
 
-6. Create a new folder named deploy in the project directory. 
-   Move the trained model file (image_captioning_model.pt) to the deploy folder. Include your Flask deployment script (main.py) in the deploy folder.
+6. Set Up Flask Deployment
+   ``` bash
+   !pip install flask
+   ```
+   * a. Create a new folder named deploy in the project directory. 
+   * b. Move the trained model file (image_captioning_model.pt) to the deploy folder. 
+   * c. Include your Flask deployment script (main.py) in the deploy folder.
