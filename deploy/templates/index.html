@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Image Captioning App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
+
+        label {
+            display: inline-block;
+            cursor: pointer;
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 5px;
+        }
+
+        #upload-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        #uploaded-image {
+            max-width: 100%;
+            display: none;
+            margin-top: 20px;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+
+        #audio-player {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <a href="/translation">Lihat untuk Bahasa Indonesia</a>
+    <h1>Image Captioning Public Spaces Transformers</h1>
+    <form method="POST" enctype="multipart/form-data">
+        <label for="image">Choose Image</label>
+        <input type="file" id="image" name="image" accept="image/*">
+        <button id="upload-button" type="submit">Upload</button>
+    </form>
+    <div id="image-container">
+        <!-- Gambar yang diunggah akan ditampilkan di sini -->
+        <img id="uploaded-image" src="#" alt="Uploaded Image">
+    </div>
+    <div id="result"></div>
+    <audio id="audio-player-id" controls style="display: none;">
+        <source src="#" type="audio/mpeg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+    <script>
+        const form = document.querySelector('form');
+        const resultDiv = document.getElementById('result');
+        const imageContainer = document.getElementById('image-container');
+        const uploadedImage = document.getElementById('uploaded-image');
+        const audioPlayer = document.getElementById('audio-player');
+    
+        // Periksa apakah halaman bahasa Indonesia atau bahasa Inggris
+        const isIndonesianPage = window.location.href.includes("/translate");
+    
+        // ...
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData();
+            formData.append('image', form.image.files[0]);
+
+            uploadedImage.src = URL.createObjectURL(form.image.files[0]);
+            uploadedImage.style.display = 'block';
+
+            resultDiv.innerText = 'Uploading...';
+
+            const actionUrl = isIndonesianPage ? '/translate' : '/';
+
+            const response = await fetch(actionUrl, {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            resultDiv.innerText = isIndonesianPage ? `Hasil Terjemahan: ${data.translation}` : `Generated Caption: ${data.caption}`;
+
+            // Hapus pemutar audio sebelumnya jika ada di halaman sebelumnya
+            if (audioPlayer) {
+                audioPlayer.remove();
+            }
+
+            // Hapus pemutar audio sebelumnya jika ada di halaman terjemahan sebelumnya
+            const previousAudioPlayer = document.getElementById('audio-player-id');
+            if (previousAudioPlayer) {
+                previousAudioPlayer.remove();
+            }
+
+            // Tampilkan pemutar audio sesuai dengan halaman
+            if (data.audio_data) {
+                const audioData = data.audio_data;
+                const audioBlob = b64toBlob(audioData, 'audio/mpeg');
+                const audioUrl = URL.createObjectURL(audioBlob);
+
+                const newAudioPlayer = new Audio();
+                newAudioPlayer.src = audioUrl;
+                newAudioPlayer.controls = true;
+                newAudioPlayer.id = isIndonesianPage ? 'audio-player-id' : 'audio-player';
+
+                // Tambahkan pemutar audio sesuai dengan halaman
+                resultDiv.appendChild(newAudioPlayer);
+            }
+        });
+// ...
+
+    
+        // Fungsi untuk mengubah base64 menjadi Blob
+        function b64toBlob(b64Data, contentType='', sliceSize=512) {
+            const byteCharacters = atob(b64Data);
+            const byteArrays = [];
+            for (let offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+                const slice = byteCharacters.slice(offset, offset + sliceSize);
+                const byteNumbers = new Array(slice.length);
+                for (let i = 0; i < slice.length; i++) {
+                    byteNumbers[i] = slice.charCodeAt(i);
+                }
+                const byteArray = new Uint8Array(byteNumbers);
+                byteArrays.push(byteArray);
+            }
+            const blob = new Blob(byteArrays, {type: contentType});
+            return blob;
+        }
+    </script>
+    
+    <script ></script>
+</body>
+</html>
