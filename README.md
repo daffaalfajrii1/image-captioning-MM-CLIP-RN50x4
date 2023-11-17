@@ -1,6 +1,6 @@
 # Image Captioning with CLIP - RN50x4
 
-![CLIP]([https://github.com/daffaalfajrii1/image-captioning-MM-CLIP-RN50x4/blob/main/architecture.png])
+![CLIP](https://github.com/daffaalfajrii1/image-captioning-MM-CLIP-RN50x4/blob/main/architecture.png)
 
 This repository contains the implementation of an image captioning model using CLIP (Contrastive Language-Image Pretraining) with a ResNet-50x4 backbone. The model was developed as part of a thesis project and achieved the following performance metrics:
 
